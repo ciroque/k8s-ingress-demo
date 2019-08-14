@@ -48,8 +48,6 @@ function main() {
 
   showMessage "We need the IP Address of the Ingress..."
   lookUpIngressIp
-
-  echo "THE INGRESS IP IS: $ingress_ip"
   askContinue
 
   showMessage "Calling the apple Service..."
@@ -72,15 +70,16 @@ function main() {
   createResource "ingress-orange.yaml"
   askContinue
 
+  showMessage "Here are the details of the example-ingress Ingress..."
+  describeResource ingress "example-ingress"
+  askContinue
+
   showMessage "Calling the orange Service..."
   getFruitWithRetry orange
-
   askContinue
 
   showMessage "This concludes the demonstration."
-
   askContinue "continue (all resources will be deleted)?"
-
 
   cleanUp
 }
@@ -92,14 +91,9 @@ function askContinue() {
   clear
 }
 
-#function getFruit() {
-#  curl -kL http://$ingress_ip/$1
-#}
-
 function getFruitWithRetry() {
   FRUIT=$1
   curlStatus=`curl -s -o /dev/null -w "%{http_code}" -kL http://$ingress_ip/$FRUIT` > /dev/null
-#  echo "  $FRUIT        $curlStatus"
   if [ $curlStatus -eq 200 ] 
   then
     curl -kL http://$ingress_ip/$FRUIT
@@ -119,6 +113,7 @@ function cleanUp() {
   deleteResource "orange.yaml"
   deleteResource "ingress.yaml"
   deleteResource "ingress-orange.yaml"
+  minikube addons disable ingress
 }
 
 function createResource() {
@@ -142,6 +137,7 @@ function lookUpIngressIp() {
     iip=$(kubectl describe ingress example-ingress | grep Address\: | tr -s ' ' | cut -d' ' -f2)
   done
   export ingress_ip=$iip
+  echo "THE INGRESS IP IS: $ingress_ip"
 }
 
 function listResources() {
