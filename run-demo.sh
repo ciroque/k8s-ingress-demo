@@ -183,6 +183,3 @@ function showMessage() {
 
 main
 
-#lookUpIngressIp
-#getFruitWithRetry orange
-
