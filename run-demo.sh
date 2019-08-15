@@ -3,6 +3,8 @@
 function main() {
   clear
 
+  init
+
   showMessage "Running k8s Ingress demo..."
   askContinue
 
@@ -70,8 +72,8 @@ function main() {
   createResource "ingress-orange.yaml"
   askContinue
 
-  showMessage "Here are the details of the example-ingress Ingress..."
-  describeResource ingress "example-ingress"
+  showMessage "Here  is the list of the currently defined Ingress resources..."
+  listResources ingress
   askContinue
 
   showMessage "Calling the orange Service..."
@@ -87,6 +89,8 @@ function main() {
 function askContinue() {
   echo
   message=${1-continue?}
+  showBar
+  echo -e "${NRML}"
   pause $message
   clear
 }
@@ -128,6 +132,21 @@ function describeResource() {
   kubectl describe $1 $2
 }
 
+
+function init() {
+  RED=`tput setaf 1`
+  YELLOW=`tput setaf 3`
+  BLUE=`tput setaf 4`
+  GREEN=`tput setaf 2`
+
+#  BLUE=$RED
+#  GREEN=$YELLOW
+
+  WHITE=`tput setaf 7`
+  BOLD=`tput smso`
+  NRML=`tput rmso`
+}
+
 function lookUpIngressIp() {
   iip=""
   while [ -z "$iip" ]
@@ -149,17 +168,16 @@ function pause() {
   read -p "$*"
 }
 
+function showBar() {
+  echo -e  "${BOLD}${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN}${NRML}"
+}
+
 function showMessage() {
-  BLUE=`tput setaf 4`
-  GREEN=`tput setaf 2`
-  WHITE=`tput setaf 7`
-  BOLD=`tput smso`
-  NRML=`tput rmso`
-  echo -e  "${BOLD}${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${NRML}"
+  showBar
   echo
   echo -e "${WHITE}$*"
   echo
-  echo -e  "${BOLD}${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${BLUE} - ${GREEN} - ${NRML}"
+  showBar
   echo -e "${NRML}${WHITE}"
 }
 
