@@ -88,7 +88,7 @@ function main() {
 
 function askContinue() {
   echo
-  message=${1-continue?}
+  message=${1-"press Enter to continue..."}
   showBar
   echo -e "${NRML}"
   pause $message
