@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: external-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    ingress.marchex.net/kong-hosts: |
+      [
+        { "name": "king-kong", "host": "swarmcluster1.som1.marchex.com", "port": 8001 },
+        { "name": "local-kong", "host": "localhost", "port": 8011 },
+      ]
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /jeremy
+          backend:
+            serviceName: external-service
+            servicePort: 8080
+
+

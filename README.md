@@ -33,6 +33,20 @@
 - Run `kubectl delete -f ingress.yaml`
 - Run `kubectl delete -f apple.yaml`
 
+## Legacy (non-k8s) Service access from k8s Cluster
+- Create a Service of type `ExternalName` (see legacy-service.yaml for example)
+- `kubectl apply -f legacy-service.yaml` to create the resource
+
+### Access the legacy service from within the cluster
+- `kubectl run shell-with-curl --rm -i --tty --image tutum/curl -- bash` to start a container and connect to the console
+- `curl -kL http://external-service:8080`
+
+### Access the legacy service with an Ingress
+- Create an Ingress resource definition: (see legacy-ingress.yaml)
+- Create the resource: `kubectl apply -f legacy-ingress.yaml`
+- Get the Cluster IP: `` `CIP=`minikube ip` ``
+- Call the service: `curl -kL http://$CIP/jeremy`
+
 ## References
 
 - [Kubernetes Ingress with Nginx Example](https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ingress-guide-nginx-example.html)

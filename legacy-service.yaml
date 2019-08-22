@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: external-service
+spec:
+  type: ExternalName
+  externalName: snarl.sea.marchex.com
+  ports:
+    - port: 8080
+
