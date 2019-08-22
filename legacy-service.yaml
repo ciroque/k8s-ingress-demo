@@ -4,7 +4,7 @@ metadata:
   name: external-service
 spec:
   type: ExternalName
-  externalName: snarl.sea.marchex.com
+  externalName: <machine-name-of-your-choosing>
   ports:
-    - port: 8080
+    - port: <port-of-your-choosing>
 
