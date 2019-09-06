@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: orange-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /orange
+          backend:
+            serviceName: orange-service
+            servicePort: 5678
+        - path: /nothing-but-oranges
+          backend:
+            serviceName: orange-service
+            servicePort: 5678
+
