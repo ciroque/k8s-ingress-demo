@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: orange-ingress
+  namespace: marchex
   annotations:
     ingress.kubernetes.io/rewrite-target: /
 spec:

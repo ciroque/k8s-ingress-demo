@@ -2,6 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: orange-app
+  namespace: marchex
   labels:
     app: orange
 spec:
@@ -17,6 +18,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: orange-service
+  namespace: marchex
 spec:
   selector:
     app: orange
