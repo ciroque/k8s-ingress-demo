@@ -2,7 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: orange-app
-  namespace: marchex
+  namespace: kkfi-testing
   labels:
     app: orange
 spec:
@@ -18,7 +18,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: orange-service
-  namespace: marchex
+  namespace: kkfi-testing
 spec:
   selector:
     app: orange

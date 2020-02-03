@@ -1,8 +1,8 @@
 #!/bin/bash
 
-##minikube addons enable ingress
+## minikube addons enable ingress
 
-kubectl apply -f namespace-marchex.yaml
+### kubectl apply -f namespace.yaml
 
 kubectl apply -f apple.yaml
 kubectl apply -f orange.yaml

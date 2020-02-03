@@ -2,7 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: banana-app
-  namespace: marchex
+  namespace: kkfi-testing
   labels:
     app: banana
 spec:
@@ -18,7 +18,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: banana-service
-  namespace: marchex
+  namespace: kkfi-testing
 spec:
   selector:
     app: banana

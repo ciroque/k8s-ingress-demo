@@ -2,7 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: apple-app
-  namespace: marchex
+  namespace: kkfi-testing
   labels:
     app: apple
 spec:
@@ -18,7 +18,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: apple-service
-  namespace: marchex
+  namespace: kkfi-testing
 spec:
   selector:
     app: apple
